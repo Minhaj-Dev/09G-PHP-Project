@@ -5,8 +5,7 @@ include("header.php");
 
 $query = "SELECT * FROM category";
 $result = mysqli_query($conn, $query);
-$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+$data = mysqli_fetch_all($result, MYSQLI_ASSOC); 
 
 ?>
 
@@ -55,7 +54,7 @@ $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     if($record['is_updated'] == "Yes") {
                                     ?>
 
-                                    <a href="">
+                                    <a href="delete_category.php?id=<?php echo $record['cate_id'] ?>">
                                         <button class="btn btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -63,7 +62,7 @@ $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <?php  }
                                         else{
                                     ?>
-                                      <a href="">
+                                       <a href="delete_category.php?id=<?php echo $record['cate_id'] ?>">
                                         <button class="btn btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </button>
