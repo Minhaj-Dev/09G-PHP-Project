@@ -6,6 +6,24 @@ $query = "SELECT * FROM category";
 $runQuery = mysqli_query($conn,$query);
 $data = mysqli_fetch_all($runQuery,MYSQLI_ASSOC);
 
+if(isset($_POST['btnAdd'])){
+    $proDesc = $_POST['txtprodesc'];
+    $proPrice = $_POST['txtproprice'];
+    $imageInfo = $_FILES['txtproImage'];
+    $imageName = $imageInfo['name'];
+    $imageTmpName = $imageInfo['tmp_name'];
+    $proCategory = $_POST['txtProcate'];
+    $proName = $_POST['txtproname'];
+    $uniq = uniqid();
+    $newImageName = $uniq.$imageName;
+
+    move_uploaded_file($imageTmpName,"uploads/".$newImageName);
+
+$insertQuery = "INSERT INTO products (`p_name`,`p_desc`,`p_image`,`p_category`,`p_price`) values('$proName','$proDesc','$newImageName','$proCategory','$proPrice')";
+mysqli_query($conn,$insertQuery);
+
+}
+
 ?>
 
 
@@ -21,7 +39,7 @@ $data = mysqli_fetch_all($runQuery,MYSQLI_ASSOC);
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Add Product</h1>
                             </div>
-                            <form class="user" method="post">
+                            <form class="user" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <input type="text" name="txtproname" class="form-control form-control-user" id="exampleFirstName"
@@ -52,11 +70,11 @@ $data = mysqli_fetch_all($runQuery,MYSQLI_ASSOC);
                                 </div>
                                  <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                      <select name="" id="" class="form-control">
+                                      <select name="txtProcate" id="" class="form-control">
                                         <?php
                                         foreach($data as $record) {
                                         ?>
-                                            <option value=""><?php echo $record['cate_name'] ?></option>
+                                            <option value="<?php echo $record['cate_id'] ?>"><?php echo $record['cate_name'] ?></option>
 <?php 
                                         }
 ?>
