@@ -57,12 +57,12 @@ $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 <?php echo $record['p_price'] ?>
                              </td>
                              <td>
-                                 <a href="">
+                                 <a href="delete_product.php?id=<?php echo $record['p_id'] ?>">
                                         <button class="btn btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </a>
-                                    <a href="">
+                                    <a href="update_product.php?id=<?php echo $record['p_id'] ?>">
                                         <button class="btn btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </button>
