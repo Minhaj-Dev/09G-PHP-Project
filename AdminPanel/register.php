@@ -70,7 +70,7 @@ if(isset($_POST['btnRegister'])){
                             <form class="user" method="post">
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" name="txtname" class="form-control form-control-user" id="exampleFirstName"
+                                        <input type="text" title="Sirf Alphabets Likho BhaiJaan"  required pattern="[a-zA-Z]{3,}" name="txtname" class="form-control form-control-user" id="exampleFirstName"
                                             placeholder="First Name">
                                     </div>
                                    

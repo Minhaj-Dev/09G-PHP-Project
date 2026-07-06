@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../connection.php");
 if(isset($_POST['btnLogin'])){
 
@@ -10,9 +11,32 @@ if(isset($_POST['btnLogin'])){
     $numberOfRecords = mysqli_num_rows($runQuery); //0
 
     if($numberOfRecords>0){
-        echo "Your Email Found You can login";
+        $data = mysqli_fetch_assoc($runQuery);  
+        $userPassword = $data['user_password'];
+       
+          if(password_verify($pass,$userPassword)){
+                $userName = $data['user_name'];
+                $userRole = $data['user_role']; 
+                $_SESSION['username'] = $userName;
+                $_SESSION['userrole'] = $userRole;
+
+                   if($userRole == 2){
+                    header("Location: ../userUi/index.php");
+                   }else if($userRole == 1){
+                    header("Location: index.php");
+                   }
+
+
+              
+
+
+          }else{
+            echo "Incorrect Password";
+          }
+
     }else{
-        echo "No Email Found First Register yourself";
+      
+        echo "No Email Found";
     }
        
 
@@ -104,5 +128,11 @@ if(isset($_POST['btnLogin'])){
     <script src="js/sb-admin-2.min.js"></script>
 
 </body>
+<script>
+history.pushState(null, null, location.href);
 
+window.onpopstate = function () {
+    history.go(1);
+};
+</script>
 </html>
